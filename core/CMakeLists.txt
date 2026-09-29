@@ -1,7 +1,10 @@
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-add_library(sentinel_core src/version.cpp)
+add_library(sentinel_core
+    src/version.cpp
+    src/cpu_collector.cpp
+    src/memory_collector.cpp)
 
 target_include_directories(sentinel_core PUBLIC include)
 target_link_libraries(sentinel_core PUBLIC
