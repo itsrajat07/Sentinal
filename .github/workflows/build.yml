@@ -1,0 +1,19 @@
+name: build
+on: [push, pull_request]
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    env:
+      VCPKG_ROOT: ${{ vars.VCPKG_ROOT || 'C:\vcpkg' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+      - name: Configure
+        run: cmake --preset default
+      - name: Build
+        run: cmake --build --preset default
+      - name: Test
+        run: ctest --preset default
